@@ -1,0 +1,30 @@
+body {}
+
+footer {
+    float: right;
+    height: 100px;
+    background: #262626;
+    width: 100%;
+    height: 100px;
+}
+
+.main-content {
+    min-height:calc(100vh - 156px);
+    padding: 0 50px 0 50px;
+}
+
+.section {
+    padding: 50px 0 0 0
+}
+
+.card {
+    margin: 0 auto;
+}
+
+.col-sm {
+    padding-top: 20px;
+}
+
+.padding-top-none {
+    padding-top: 0;
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <script src="scripts/jquery.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="style/style.css">
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="#">Atlantic Inc.</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+        </header>
+
+        <div class="main-content">
+            <div class="section"><h1>Our Products</h1></div>
+            <hr>
+            <div class="section">
+                <div class="row">
+                    <!-- <div class="col-sm">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="./media/placeholder_shirt.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Shirt #1</h5>
+                                <p class="card-text">This is a shirt</p>
+                                <a id="1" href="#"  class="buy-btn btn btn-primary">Buy!</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="./media/placeholder_shirt.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Shirt #2</h5>
+                                <p class="card-text">This is another shirt</p>
+                                <a id="2" href="#"  class="buy-btn btn btn-primary">Buy!</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="./media/placeholder_shirt.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Shirt #3</h5>
+                                <p class="card-text">This is a third shirt</p>
+                                <a id="3" href="#" class="buy-btn btn btn-primary">Buy!</a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <footer>
+        </footer>
+        
+        <script>
+            jQuery.getJSON("./products.json", (data, err) => {
+                if(err) {
+                    console.log("Error: ", err)
+                } else {
+                    console.log(data)
+                }
+            })
+
+            $( ".buy-btn" ).click(event, function() {
+                productId = $(event.target).attr("id")
+                document.productId = productId
+                location.href = "./buy.html";
+            });
+        </script>
+    </body>
+</html>
