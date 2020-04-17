@@ -4,22 +4,22 @@
             "id":1,
             "image":"./media/placeholder_shirt.jpg",
             "price":10,
-            "name":"Shirt #1",
+            "name":"Test Shirt 1",
             "description":"This is a wounderful shirt!!!"
         }, 
         {
             "id":2,
             "image":"./media/placeholder_shirt.jpg",
             "price":20,
-            "name":"Shirt #2",
-            "description":"This is a wounderful shirt!!!"
+            "name":"Test Shirt 2",
+            "description":"Buy me! Buy me!"
         }, 
         {
             "id":3,
             "image":"./media/placeholder_shirt.jpg",
             "price":30,
-            "name":"Shirt #3",
-            "description":"This is a wounderful shirt!!!"
+            "name":"Test Shirt 3",
+            "description":"it's worth the money $$$$$"
         }
     ]
 }

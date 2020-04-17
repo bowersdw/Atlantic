@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <script src="scripts/jquery.js"></script>
+        <script src="scripts/cart.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="style/style.css">
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="#">Atlantic Inc.</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="\">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+        </header>
+
+        <div class="main-content">
+            <div class="section"><h1>Your Cart</h1></div>
+            <hr>
+            <div class="section">
+                <h3>Review Cart</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">QTY</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-table">
+                            
+                            
+                        </tbody>
+                    </table>            
+                </div>
+            </div>
+        <footer>
+        </footer>
+        
+        <script>
+            Cart = window.Cart // Get the cart class and store it in Cart
+            cartArray = Cart.getCart() // Get the array corresponding to the cart
+            window.price = 0 // Will store the total price
+
+            function createIndividualRows(j) { // I am not going to comment this. Just ask me about it if you have any questions and would like to know more. It uses a recursive function so that the next step is not called before the previus step. Again, look up async functions
+                if(j < cartArray.length) {
+                    Cart.getProductInfo(cartArray[j].id).then( (data) => {
+                        window.price += cartArray[j].qty * data.price
+                        row = `
+                            <tr>
+                                <td>${data.id}</td>
+                                <td>${data.name}</td>
+                                <td>${cartArray[j].qty}</td>
+                                <td>$${cartArray[j].qty * data.price}</td>
+                            </tr>`
+                        $("#cart-table").html($("#cart-table").html() + row)
+                        createIndividualRows(j+1)
+                    })
+                } else {
+                    createTotalRow()
+                }
+            }
+
+            function createTotalRow() {
+                row = `
+                <tr>
+                    <th>Total: </th>
+                    <td></td>
+                    <td></td>
+                    <td>$${window.price}</td>
+                </tr>`
+                $("#cart-table").html($("#cart-table").html() + row)
+            }
+
+            createIndividualRows(0)
+
+        </script>
+    </body>
+</html>

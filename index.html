@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <script src="scripts/jquery.js"></script>
+        <script src="scripts/cart.js"></script>
         <script src="bootstrap/js/bootstrap.js"></script>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="style/style.css">
@@ -19,7 +20,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="\">Home <span class="sr-only">(current)</span></a>
                     </li>
                   </ul>
                 </div>
@@ -30,58 +31,51 @@
             <div class="section"><h1>Our Products</h1></div>
             <hr>
             <div class="section">
-                <div class="row">
-                    <!-- <div class="col-sm">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="./media/placeholder_shirt.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Shirt #1</h5>
-                                <p class="card-text">This is a shirt</p>
-                                <a id="1" href="#"  class="buy-btn btn btn-primary">Buy!</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="./media/placeholder_shirt.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Shirt #2</h5>
-                                <p class="card-text">This is another shirt</p>
-                                <a id="2" href="#"  class="buy-btn btn btn-primary">Buy!</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="./media/placeholder_shirt.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Shirt #3</h5>
-                                <p class="card-text">This is a third shirt</p>
-                                <a id="3" href="#" class="buy-btn btn btn-primary">Buy!</a>
-                            </div>
-                        </div>
-                    </div> -->
+                <div class="row" id="products-section">
                 </div>
             </div>
         </div>
-
         <footer>
         </footer>
         
         <script>
-            jQuery.getJSON("./products.json", (data, err) => {
-                if(err) {
+
+            jQuery.getJSON("./products.json", (data, err) => { // Reads the json file and once read calls the function defined. Look up arrow functions
+                if(err != "success") { // If there is an error
                     console.log("Error: ", err)
-                } else {
-                    console.log(data)
+                } else { // Otherwise
+
+                    for(i = 0; i < data.products.length; i++) { // For evert product in the data object which is what was stored in the json file
+                        product = data.products[i] // get the current product
+
+                        cardHTML =  // Use some fancy new JS features to create a string that represents the products card
+                            `<div class="col-sm">
+                                <div class="card" style="width: 18rem;">
+                                    <img class="card-img-top" src="${product.image}" alt="Product">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${product.name} - $${product.price}</h5>
+                                        <p class="card-text">${product.description}</p>
+                                        <a id="${product.id}" href="#"  class="add-cart-btn btn btn-primary">Add To Cart</a>
+                                        <a href="/cart.html"  class="btn btn-primary">Checkout</a>
+                                    </div>
+                                </div>
+                            </div>`
+                        
+                        $("#products-section").html($("#products-section").html() + cardHTML) // Add it to the acctuall HTML
+                    }
+
+                    $( ".add-cart-btn" ).click(event, function() { // When an add to cart button is pressed
+                        productId = $(event.target).attr("id") // Get the products id which is stored in the id parameter
+                        handleAddToCart(productId) // Add the product to the cart
+                    });
+
+                    
                 }
             })
 
-            $( ".buy-btn" ).click(event, function() {
-                productId = $(event.target).attr("id")
-                document.productId = productId
-                location.href = "./buy.html";
-            });
+            function handleAddToCart(id) { // Fairly self explanitory. window.Cart is defined in the cart.js file
+                window.Cart.addToCart(id)
+            }
         </script>
     </body>
 </html>
